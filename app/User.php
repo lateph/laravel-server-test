@@ -24,7 +24,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token','api_token'
     ];
 
     public function generateToken()
@@ -34,4 +34,16 @@ class User extends Authenticatable
 
         return $this->api_token;
     }
+
+    public function getProfilePicAttribute()
+    {
+        if($this->attributes['profilePic']){
+            return url('/img').'/'.$this->attributes['profilePic'];
+        }
+        else{
+            return false;
+        }
+    }
+
+    protected $appends = ['profilePic'];
 }
